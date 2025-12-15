@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hospital Management System</title>
+  <style>
+    :root {
+      --primary: #0a74da;
+      --primary-dark: #084c95;
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 18px rgba(0,0,0,0.1);
+    }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      background: var(--bg);
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 50px 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    nav {
+      background: #fff;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding-bottom: 6px;
+      border-bottom: 3px solid transparent;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      border-bottom: 3px solid var(--primary);
+    }
+    .hero {
+      margin: 40px auto;
+      max-width: 1100px;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+    .hero-text h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--primary-dark);
+    }
+    .container {
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 25px;
+      margin: 25px 0;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+    }
+    h2 {
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+    }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: var(--primary-dark);
+    }
+    input, select {
+      width: 95%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .doctor-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .doctor-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      width: 280px;
+      transition: 0.3s;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .doctor-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .doctor-details h3 {
+      font-size: 1.2rem;
+      margin: 0;
+      color: var(--primary-dark);
+    }
+
+    .doctor-details p {
+      margin: 5px 0 0;
+      color: #555;
+      font-size: 0.9rem;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: var(--primary);
+      color: #fff;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CityCare Hospital</h1>
+    <p>Modern. Professional. Trusted Healthcare.</p>
+  </header>
+
+  <nav>
+    <a href="#patients">Patient Registration</a>
+    <a href="#appointments">Appointments</a>
+    <a href="#doctors">Doctors</a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-text">
+      <h2>Welcome to CityCare Hospital</h2>
+      <p>Your health is our top priority. Book appointments, register patients and explore our expert doctors with ease.</p>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" width="200" />
+  </div>
+
+  <div class="container">
+    <section id="patients" class="card">
+      <h2>Patient Registration</h2>
+      <input type="text" id="pname" placeholder="Patient Name" />
+      <input type="number" id="page" placeholder="Age" />
+      <select id="pgender">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <button class="btn" onclick="registerPatient()">Register</button>
+      <p id="pmsg"></p>
+    </section>
+
+    <section id="appointments" class="card">
+      <h2>Book Appointment</h2>
+      <input type="text" id="aname" placeholder="Patient Name" />
+      <input type="date" id="adate" />
+      <select id="adoctor">
+        <option value="">Select Doctor</option>
+        <option>Dr. Rao – Cardiologist</option>
+        <option>Dr. Sharma – Neurologist</option>
+        <option>Dr. Mehta – Orthopedic</option>
+        <option>Dr. Pao – Gynecologist</option>
+        <option value="">Dr. Varma – ENT specalist</option>
+        <option value="">Dr. Jheta – Opthamologist</option>
+      </select>
+      <button class="btn" onclick="bookAppointment()">Book</button>
+      <p id="amsg"></p>
+    </section>
+
+    <section id="doctors" class="card">
+      <h2>Doctors List</h2>
+      <div id="docList" class="doctor-cards">
+        <!-- Example Doctor Card -->
+        <div class="doctor-card">
+          <img src="https://www.sheknows.com/wp-content/uploads/2024/04/kanye-west.jpg?w=1440" alt="Dr. Rao" class="doctor-img" />
+          <div class="doctor-details">
+            <h3>Dr. Rao</h3>
+            <p>Cardiologist</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://img.buzzfeed.com/buzzfeed-static/static/2015-01/30/11/enhanced/webdr09/original-26702-1422635651-12.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto" alt="Dr. Sharma" class="doctor-img" />
+          <div class="doctor-details">
+            <h3>Dr. Sharma</h3>
+            <p>Neurologist</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://static01.nyt.com/images/2023/10/26/arts/24morgan-freeman1/24morgan-freeman1-mediumSquareAt3X.jpg" alt="Dr. Mehta" class="doctor-img" />
+          <div class="doctor-details">
+            <h3>Dr. Mehta</h3>
+            <p>Orthopedic</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://s43365.pcdn.co/wp-content/uploads/2022/12/Jackie-Chan.jpeg" alt="Dr. Pao" class="doctor-img" />
+          <div class="doctor-details">
+            <h3>Dr. Pao</h3>
+            <p>Gynecologist</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://res.cloudinary.com/dr6f47ka1/image/fetch/w_300,h_300,c_fill,g_face,f_auto/https://works-files.s3.amazonaws.com/5e9499fb-4913-4233-bd2f-e07ef51fd245" alt="Dr. Varma" class="doctor-img" />
+          <div class="doctor-details">
+            <h3>Dr. Varma</h3>
+            <p>ENT specalist</p>
+          </div>
+        </div>
+        <div class="doctor-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCi7Aj_raDf7MqKi4339cxavMWrj-uBzlEg&s" alt="Dr. Jheta" class="doctor-img" />
+          <div class="doctor-details">
+            <h3>Dr. Jheta</h3>
+            <p>Opthamologist</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2025 CityCare Hospital — All Rights Reserved</p>
+  </footer>
+
+  <script>
+    function registerPatient() {
+      let name = document.getElementById('pname').value;
+      let age = document.getElementById('page').value;
+      let gender = document.getElementById('pgender').value;
+      if (!name || !age || !gender) {
+        document.getElementById('pmsg').textContent = "Please fill all fields";
+        return;
+      }
+      document.getElementById('pmsg').textContent = "Patient Registered Successfully!";
+    }
+
+    function bookAppointment() {
+      let name = document.getElementById('aname').value;
+      let date = document.getElementById('adate').value;
+      let doctor = document.getElementById('adoctor').value;
+      if (!name || !date || !doctor) {
+        document.getElementById('amsg').textContent = "Please fill all fields";
+        return;
+      }
+      document.getElementById('amsg').textContent = "Appointment Booked Successfully!";
+    }
+
+    // Smooth scrolling for nav links
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default jump
+        const targetID = this.getAttribute('href').substring(1); // remove #
+        const targetSection = document.getElementById(targetID);
+        if (targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 80, // adjust offset for sticky nav
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
